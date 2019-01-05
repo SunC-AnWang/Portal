@@ -1,11 +1,19 @@
 package com.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import org.springframework.util.DigestUtils;
+
+import com.baidubce.BceClientConfiguration;
+import com.baidubce.auth.DefaultBceCredentials;
+import com.baidubce.services.doc.DocClient;
 
 /**
  * Created by Administrator.
@@ -91,7 +99,45 @@ public class FileUtil {
         FILE_TYPE_MAP.put("zip", "comp");
         FILE_TYPE_MAP.put("rar", "comp");
         FILE_TYPE_MAP.put("gz" , "comp");//gz文件
+    }
+    
+    /**
+     * 获取文件类型
+     * @param file
+     * @return
+     */
+    public static String getFileType(File file) {
+        if(file.isDirectory()){
+            return "folder-open";
+        }
+        String fileName = file.getPath();
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String fileType = FILE_TYPE_MAP.get(suffix);
+        return fileType == null ? "file" : fileType;
+    }
 
+    private static DocClient docClient = null;
+    public static DocClient getDocClient(){
+        if(docClient == null){
+            BceClientConfiguration config = new BceClientConfiguration();
+            config.setConnectionTimeoutInMillis(3000);
+            config.setSocketTimeoutInMillis(2000);
+            //DefaultBceCredentials(String accessKeyId, String secretKey)
+            //其中AK/SK为访问DOC做签名验证
+            config.setCredentials(new DefaultBceCredentials("3f87852806b2406dad987f9139120c6e", "8d8e5fb70309411b8ad9a055fda6922b"));
+            docClient = new DocClient(config);
+        }
+        return docClient;
+    }
 
+    public static String MD5(File file){
+        byte[] bys = null;
+        try {
+            bys = org.apache.commons.io.FileUtils.readFileToByteArray(file);
+            return DigestUtils.md5DigestAsHex(bys).toUpperCase();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

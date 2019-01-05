@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.entity.UserEntity;
+import com.util.UserUtil;
 import com.service.FileService;
 import com.service.UserService;
 
@@ -58,8 +59,26 @@ public class UserController {
 			session.setAttribute("totalSize", exsitUser.getTotalSize());
 			return "index";
 		}else{
-			request.setAttribute("msg", "�û������������");
+			request.setAttribute("msg", "登陆失败");
 			return "login";
 		}
 	}
+	
+	@RequestMapping("/main")
+	public String index(HttpServletRequest request){
+	
+	String username = UserUtil.getUsername(request);
+	
+	String countSize = userService.getCountSize(username);
+	request.setAttribute("countSize",countSize);
+	return "main";
+	}
+
+		public void setSystemId(String systemId) {
+
+			}
+
+			public String getSystemId() {
+				return null;
+			}
 }

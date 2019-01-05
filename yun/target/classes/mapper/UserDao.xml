@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.UserDao" >
-	<insert id="addUser" parameterType="UserEntity">
-		INSERT INTO `test`.`user` 
-		(`username`, `password`) 
-		VALUES (#{username}, #{password});
-	</insert>
-	<select id="findUser" parameterType="UserEntity" resultType="UserEntity">
+<insert id="addUser" parameterType="UserEntity">
+	INSERT INTO `test`.`user` 
+	(`username`, `password`) 
+	VALUES (#{username}, #{password});
+</insert>
+<select id="findUser" parameterType="UserEntity" resultType="UserEntity">
 	select * from user
 	where username = #{username} and password = #{password}
 </select>
+<select id="getCountSize" parameterType="java.lang.String" resultType="java.lang.String">
+	select countSize from user where username = #{username}
+</select>
+<update id="reSize">
+	update user set countSize = #{formatSize} where username = #{username}
+</update>
 </mapper>
