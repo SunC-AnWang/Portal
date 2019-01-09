@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.qdu.pojo.WorkBillInfo" table="WorkBillInfo" schema="dbo" catalog="AntExpress" optimistic-lock="version">
+        <id name="wid" type="int">
+            <column name="WID" />
+            <generator class="assigned" />
+        </id>
+        <property name="nid" type="int">
+            <column name="NID" not-null="true" />
+        </property>
+        <property name="saff" type="string">
+            <column name="Saff" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

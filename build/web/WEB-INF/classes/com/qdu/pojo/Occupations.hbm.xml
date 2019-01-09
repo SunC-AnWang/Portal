@@ -1,0 +1,18 @@
+<?xml version="1.0"?>  
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.qdu.pojo.Occupations" table="Occupations" schema="dbo" catalog="AntExpress" optimistic-lock="version">
+        <id name="oid" type="int">
+            <column name="OId" />
+            <generator class="assigned" />
+        </id>
+        <property name="eoccupation" type="string">
+            <column name="EOccupation" />
+        </property>
+        <property name="other" type="string">
+            <column name="Other" />
+        </property>
+    </class>
+</hibernate-mapping>

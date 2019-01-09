@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.qdu.pojo.Saff" table="Saff" schema="dbo" catalog="AntExpress" optimistic-lock="version">
+        <id name="sid" type="int">
+            <column name="SID" />
+            <generator class="assigned" />
+        </id>
+        <property name="sname" type="string">
+            <column name="SName" />
+        </property>
+        <property name="sgender" type="string">
+            <column name="SGender" />
+        </property>
+        <property name="sphone" type="string">
+            <column name="SPhone" />
+        </property>
+        <property name="semail" type="string">
+            <column name="SEmail" />
+        </property>
+    </class>
+</hibernate-mapping>
